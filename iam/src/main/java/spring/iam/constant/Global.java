@@ -18,7 +18,8 @@ public enum Global {
 	PARAMETER_NOT_READABLE(6, "missing or request parameter is not readable.", HttpStatus.BAD_REQUEST),
 	HEADER_NOT_READABLE(7, "missing or request header is not readable.", HttpStatus.BAD_REQUEST),
 	UNAUTHORIZED(8, "ill legal token: token has been edited, expired or not publish by us.", HttpStatus.UNAUTHORIZED),
-	FORBIDDEN(9, "forbidden: do not has right authority, do not f*ck with cat.", HttpStatus.FORBIDDEN);
+	MISSING_AUTHORIZATION(9, "unauthorized: missing authorization or x-refresh-token header in header list.", HttpStatus.UNAUTHORIZED),
+	FORBIDDEN(10, "forbidden: do not has right authority, do not f*ck with cat.", HttpStatus.FORBIDDEN);
 
 	int code;
 	String message;

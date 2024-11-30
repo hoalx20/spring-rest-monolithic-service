@@ -40,11 +40,11 @@ public class Device implements Serializable {
 	Long id;
 
 	@NotBlank(message = "ipAddress can not be blank")
-	@Column(name = "ipAddress", nullable = false)
+	@Column(name = "ip_address", nullable = false)
 	String ipAddress;
 
 	@NotBlank(message = "userAgent can not be blank")
-	@Column(name = "userAgent", nullable = false)
+	@Column(name = "user_agent", nullable = false)
 	String userAgent;
 
 	@CreationTimestamp

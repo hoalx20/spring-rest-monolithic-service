@@ -31,6 +31,7 @@ public class DeviceSrv implements IDeviceSrv {
 	UserRepo userRepo;
 	DeviceMpr deviceMpr;
 
+	@Override
 	public Device ensureExistedById(Long id) {
 		Optional<Device> old = deviceRepo.findById(id);
 		if (!old.isPresent()) {
@@ -39,6 +40,7 @@ public class DeviceSrv implements IDeviceSrv {
 		return old.get();
 	}
 
+	@Override
 	public User ensureOwningExistedByIds(Long id) {
 		Optional<User> owning = userRepo.findById(id);
 		if (!owning.isPresent())

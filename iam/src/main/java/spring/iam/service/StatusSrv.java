@@ -31,6 +31,7 @@ public class StatusSrv implements IStatusSrv {
 	UserRepo userRepo;
 	StatusMpr statusMpr;
 
+	@Override
 	public Status ensureExistedById(Long id) {
 		Optional<Status> old = statusRepo.findById(id);
 		if (!old.isPresent()) {
@@ -39,6 +40,7 @@ public class StatusSrv implements IStatusSrv {
 		return old.get();
 	}
 
+	@Override
 	public User ensureOwningExistedByIds(Long id) {
 		Optional<User> owning = userRepo.findById(id);
 		if (!owning.isPresent())
@@ -46,6 +48,7 @@ public class StatusSrv implements IStatusSrv {
 		return owning.get();
 	}
 
+	@Override
 	public void ensureOwningAvailableById(Long id) {
 		Optional<Status> existed = statusRepo.findByUserId(id);
 		if (existed.isPresent()) {

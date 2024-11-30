@@ -1,6 +1,9 @@
 package spring.iam.model;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -8,6 +11,9 @@ import org.hibernate.annotations.SoftDelete;
 import org.hibernate.annotations.SoftDeleteType;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.type.NumericBooleanConverter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -39,7 +45,7 @@ import spring.iam.introspector.UserIntrospect;
 @EntityListeners(value = UserIntrospect.class)
 @Table
 @SoftDelete
-public class User {
+public class User implements UserDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Long id;
@@ -66,4 +72,16 @@ public class User {
 	@ManyToMany(fetch = FetchType.EAGER)
 	@SoftDelete(strategy = SoftDeleteType.ACTIVE, converter = NumericBooleanConverter.class)
 	Set<Role> roles;
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		List<GrantedAuthority> authorities = new ArrayList<>();
+		roles.forEach(role -> {
+			authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getName()));
+			role.getPrivileges().forEach(privilege -> {
+				authorities.add(new SimpleGrantedAuthority(privilege.getName()));
+			});
+		});
+		return authorities;
+	}
 }

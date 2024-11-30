@@ -47,6 +47,7 @@ public class RoleSrv implements IRoleSrv {
 		return queried.get();
 	}
 
+	@Override
 	public Set<Privilege> ensureOwningExistedByIds(Set<Long> ids) {
 		var owning = privilegeRepo.findAllById(ids);
 		if (CollectionUtils.isEmpty(owning))

@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-IamApplication<iam>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "spring.iam.IamApplication",
+      "projectName": "iam",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}

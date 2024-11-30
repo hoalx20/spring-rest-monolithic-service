@@ -42,13 +42,12 @@ public enum Failed {
 	SIGN_IN(225, "can not sign in: try again later.", HttpStatus.INTERNAL_SERVER_ERROR),
 	BAD_CREDENTIALS(226, "bad credentials: username or password not match.", HttpStatus.BAD_REQUEST),
 	RETRIEVE_PROFILE(227, "can not retrieve profile: try again later.", HttpStatus.INTERNAL_SERVER_ERROR),
-	MISSING_AUTHORIZATION(228, "unauthorized: missing authorization or x-refresh-token header in header list.", HttpStatus.UNAUTHORIZED),
-	SIGN_OUT(229, "can not sign out: token not be recalled.", HttpStatus.INTERNAL_SERVER_ERROR),
-	ENSURE_NOT_BAD_CREDENTIALS(230, "can not ensure token is not recall.", HttpStatus.UNAUTHORIZED),
-	TOKEN_BLOCKED(231, "token has been recall: can not use this any more", HttpStatus.UNAUTHORIZED),
-	TOKEN_NOT_SUITABLE(232, "access token and refresh token are not suitable.", HttpStatus.UNAUTHORIZED),
-	RECALL_TOKEN(233, "refresh token may not complete: token not be recalled.", HttpStatus.INTERNAL_SERVER_ERROR),
-	REFRESH_JWT_TOKEN(234, "can not refresh token: try again later.", HttpStatus.INTERNAL_SERVER_ERROR);
+	SIGN_OUT(228, "can not sign out: token not be recalled.", HttpStatus.INTERNAL_SERVER_ERROR),
+	ENSURE_NOT_BAD_CREDENTIALS(229, "can not ensure token is not recall.", HttpStatus.UNAUTHORIZED),
+	TOKEN_BLOCKED(230, "token has been recall: can not use this any more", HttpStatus.UNAUTHORIZED),
+	TOKEN_NOT_SUITABLE(231, "access token and refresh token are not suitable.", HttpStatus.UNAUTHORIZED),
+	RECALL_TOKEN(232, "refresh token may not complete: token not be recalled.", HttpStatus.INTERNAL_SERVER_ERROR),
+	REFRESH_JWT_TOKEN(233, "can not refresh token: try again later.", HttpStatus.INTERNAL_SERVER_ERROR);
 
 	int code;
 	String message;

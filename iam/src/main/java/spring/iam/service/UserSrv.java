@@ -6,6 +6,8 @@ import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -34,11 +36,17 @@ public class UserSrv implements IUserSrv {
 	UserMpr userMpr;
 
 	@Override
+	public UserDetailsService userDetailsService() {
+		return username -> userRepo.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(Failed.BAD_CREDENTIALS.getMessage()));
+	}
+
+	@Override
 	public void ensureNotExistedByUsername(String username) {
 		if (userRepo.countExistedByUsername(username) > 0)
 			throw new ServiceExc(Failed.ALREADY_EXISTED);
 	}
 
+	@Override
 	public User ensureExistedById(Long id) {
 		Optional<User> old = userRepo.findById(id);
 		if (!old.isPresent())
@@ -82,6 +90,21 @@ public class UserSrv implements IUserSrv {
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new ServiceExc(Failed.FIND_BY_ID);
+		}
+	}
+
+	@Override
+	public UserRes findByUsername(String username) {
+		try {
+			Optional<User> queried = userRepo.findByUsername(username);
+			if (!queried.isPresent())
+				throw new ServiceExc(Failed.NOT_EXISTS);
+			return userMpr.asResponse(queried.get());
+		} catch (ServiceExc e) {
+			throw e;
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new ServiceExc(Failed.FIND_BY);
 		}
 	}
 
@@ -138,6 +161,7 @@ public class UserSrv implements IUserSrv {
 	public UserRes deleteById(Long id) {
 		try {
 			var value = ensureExistedById(id);
+			System.out.println(value.getUsername());
 			UserRes response = userMpr.asResponse(value);
 			userRepo.delete(value);
 			return response;
