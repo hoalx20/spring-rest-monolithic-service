@@ -12,6 +12,6 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class RoleUpd {
-	@NotBlank(message = "description can not be blank")
-	String description;
+  @NotBlank(message = "description can not be blank")
+  String description;
 }

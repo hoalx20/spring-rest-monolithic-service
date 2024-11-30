@@ -7,13 +7,13 @@ import spring.iam.model.dto.RegisterReq;
 import spring.iam.model.dto.RegisterRes;
 
 public interface IAuthSrv {
-	CredentialRes signUp(RegisterReq request);
+  CredentialRes signUp(RegisterReq request);
 
-	CredentialRes signIn(CredentialReq request);
+  CredentialRes signIn(CredentialReq request);
 
-	RegisterRes me(String username);
+  RegisterRes me(String username);
 
-	long signOut(BadCredentialCre creation);
+  long signOut(BadCredentialCre creation);
 
-	CredentialRes refresh(BadCredentialCre badCredential, String referId, String refreshToken);
+  CredentialRes refresh(BadCredentialCre badCredential, String referId, String refreshToken);
 }

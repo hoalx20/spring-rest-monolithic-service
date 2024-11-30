@@ -12,6 +12,6 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserUpd {
-	@NotBlank(message = "password can not be blank")
-	String password;
+  @NotBlank(message = "password can not be blank")
+  String password;
 }

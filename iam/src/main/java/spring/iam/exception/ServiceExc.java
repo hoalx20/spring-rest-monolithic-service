@@ -12,5 +12,5 @@ import spring.iam.constant.Failed;
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class ServiceExc extends RuntimeException {
-	Failed causeBy;
+  Failed causeBy;
 }

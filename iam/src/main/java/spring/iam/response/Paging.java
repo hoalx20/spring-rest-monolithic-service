@@ -9,7 +9,7 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Paging {
-	int page;
-	int totalPage;
-	long totalRecord;
+  int page;
+  int totalPage;
+  long totalRecord;
 }

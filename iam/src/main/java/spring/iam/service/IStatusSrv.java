@@ -8,21 +8,21 @@ import spring.iam.model.dto.StatusUpd;
 import spring.iam.response.Multi;
 
 public interface IStatusSrv {
-	Status ensureExistedById(Long id);
+  Status ensureExistedById(Long id);
 
-	User ensureOwningExistedByIds(Long id);
+  User ensureOwningExistedByIds(Long id);
 
-	void ensureOwningAvailableById(Long id);
+  void ensureOwningAvailableById(Long id);
 
-	StatusRes save(StatusCre creation);
+  StatusRes save(StatusCre creation);
 
-	StatusRes findById(Long id);
+  StatusRes findById(Long id);
 
-	Multi<StatusRes> findAll(int page, int size);
+  Multi<StatusRes> findAll(int page, int size);
 
-	Multi<StatusRes> findAllArchived(int page, int size);
+  Multi<StatusRes> findAllArchived(int page, int size);
 
-	StatusRes updateById(Long id, StatusUpd update);
+  StatusRes updateById(Long id, StatusUpd update);
 
-	StatusRes deleteById(Long id);
+  StatusRes deleteById(Long id);
 }

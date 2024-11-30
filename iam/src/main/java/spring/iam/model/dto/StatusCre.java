@@ -12,8 +12,8 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class StatusCre {
-	@NotBlank(message = "content can not be blank")
-	String content;
+  @NotBlank(message = "content can not be blank")
+  String content;
 
-	Long userId;
+  Long userId;
 }

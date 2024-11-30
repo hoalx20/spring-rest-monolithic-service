@@ -7,19 +7,19 @@ import spring.iam.model.dto.PrivilegeUpd;
 import spring.iam.response.Multi;
 
 public interface IPrivilegeSrv {
-	void ensureNotExistedByName(String name);
+  void ensureNotExistedByName(String name);
 
-	Privilege ensureExistedById(Long id);
+  Privilege ensureExistedById(Long id);
 
-	PrivilegeRes save(PrivilegeCre creation);
+  PrivilegeRes save(PrivilegeCre creation);
 
-	PrivilegeRes findById(Long id);
+  PrivilegeRes findById(Long id);
 
-	Multi<PrivilegeRes> findAll(int page, int size);
+  Multi<PrivilegeRes> findAll(int page, int size);
 
-	Multi<PrivilegeRes> findAllArchived(int page, int size);
+  Multi<PrivilegeRes> findAllArchived(int page, int size);
 
-	PrivilegeRes updateById(Long id, PrivilegeUpd update);
+  PrivilegeRes updateById(Long id, PrivilegeUpd update);
 
-	PrivilegeRes deleteById(Long id);
+  PrivilegeRes deleteById(Long id);
 }

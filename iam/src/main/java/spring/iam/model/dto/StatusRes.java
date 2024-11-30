@@ -11,8 +11,8 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class StatusRes {
-	Long id;
-	String content;
+  Long id;
+  String content;
 
-	UserRes user;
+  UserRes user;
 }

@@ -1,7 +1,6 @@
 package spring.iam.model.dto;
 
 import java.util.Date;
-
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,7 +12,7 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class BadCredentialRes {
-	Long id;
-	String accessTokenId;
-	Date accessTokenExpiredAt;
+  Long id;
+  String accessTokenId;
+  Date accessTokenExpiredAt;
 }

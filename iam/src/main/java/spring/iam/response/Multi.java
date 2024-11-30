@@ -1,7 +1,6 @@
 package spring.iam.response;
 
 import java.util.List;
-
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,6 +12,6 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Multi<T> {
-	List<T> values;
-	Paging paging;
+  List<T> values;
+  Paging paging;
 }

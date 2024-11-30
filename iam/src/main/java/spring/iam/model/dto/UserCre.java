@@ -1,10 +1,9 @@
 package spring.iam.model.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import jakarta.validation.constraints.NotBlank;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,11 +15,11 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserCre {
-	@NotBlank(message = "username can not be blank")
-	String username;
+  @NotBlank(message = "username can not be blank")
+  String username;
 
-	@NotBlank(message = "password can not be blank")
-	String password;
+  @NotBlank(message = "password can not be blank")
+  String password;
 
-	Set<Long> roleIds = new HashSet<>(List.of(1L));
+  Set<Long> roleIds = new HashSet<>(List.of(1L));
 }

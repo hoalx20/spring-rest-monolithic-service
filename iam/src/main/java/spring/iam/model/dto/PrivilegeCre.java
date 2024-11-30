@@ -12,9 +12,9 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class PrivilegeCre {
-	@NotBlank(message = "name can not be blank")
-	String name;
+  @NotBlank(message = "name can not be blank")
+  String name;
 
-	@NotBlank(message = "description can not be blank")
-	String description;
+  @NotBlank(message = "description can not be blank")
+  String description;
 }

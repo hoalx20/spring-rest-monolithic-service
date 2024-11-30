@@ -15,13 +15,13 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CredentialReq {
 
-	@Parameter(name = "username", description = "username", required = true, example = "hoalx1")
-	@Schema(name = "username", description = "username", type = "string")
-	@NotBlank(message = "username can not be blank")
-	String username;
+  @Parameter(name = "username", description = "username", required = true, example = "hoalx1")
+  @Schema(name = "username", description = "username", type = "string")
+  @NotBlank(message = "username can not be blank")
+  String username;
 
-	@Parameter(name = "password", description = "password", required = true, example = "hoalx1")
-	@Schema(name = "password", description = "password", type = "string")
-	@NotBlank(message = "password can not be blank")
-	String password;
+  @Parameter(name = "password", description = "password", required = true, example = "hoalx1")
+  @Schema(name = "password", description = "password", type = "string")
+  @NotBlank(message = "password can not be blank")
+  String password;
 }

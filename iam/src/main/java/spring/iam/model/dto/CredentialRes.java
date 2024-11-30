@@ -14,16 +14,35 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CredentialRes {
 
-	@Parameter(name = "accessToken", description = "accessToken", required = true, example = "accessToken")
-	@Schema(name = "accessToken", description = "accessToken", type = "string")
-	String accessToken;
-	@Parameter(name = "accessTokenIssueAt", description = "accessTokenIssueAt", required = true, example = "0")
-	@Schema(name = "accessTokenIssueAt", description = "accessTokenIssueAt", type = "long")
-	long accessTokenIssuedAt;
-	@Parameter(name = "refreshToken", description = "refreshToken", required = true, example = "refreshToken")
-	@Schema(name = "refreshToken", description = "refreshToken", type = "string")
-	String refreshToken;
-	@Parameter(name = "refreshTokenIssueAt", description = "refreshTokenIssueAt", required = true, example = "0")
-	@Schema(name = "refreshTokenIssueAt", description = "refreshTokenIssueAt", type = "long")
-	long refreshTokenIssuedAt;
+  @Parameter(
+      name = "accessToken",
+      description = "accessToken",
+      required = true,
+      example = "accessToken")
+  @Schema(name = "accessToken", description = "accessToken", type = "string")
+  String accessToken;
+
+  @Parameter(
+      name = "accessTokenIssueAt",
+      description = "accessTokenIssueAt",
+      required = true,
+      example = "0")
+  @Schema(name = "accessTokenIssueAt", description = "accessTokenIssueAt", type = "long")
+  long accessTokenIssuedAt;
+
+  @Parameter(
+      name = "refreshToken",
+      description = "refreshToken",
+      required = true,
+      example = "refreshToken")
+  @Schema(name = "refreshToken", description = "refreshToken", type = "string")
+  String refreshToken;
+
+  @Parameter(
+      name = "refreshTokenIssueAt",
+      description = "refreshTokenIssueAt",
+      required = true,
+      example = "0")
+  @Schema(name = "refreshTokenIssueAt", description = "refreshTokenIssueAt", type = "long")
+  long refreshTokenIssuedAt;
 }

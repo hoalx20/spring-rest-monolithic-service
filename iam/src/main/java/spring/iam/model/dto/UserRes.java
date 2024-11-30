@@ -1,9 +1,7 @@
 package spring.iam.model.dto;
 
-import java.util.Set;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
+import java.util.Set;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,11 +13,10 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserRes {
-	Long id;
-	String username;
-	@JsonIgnore
-	String password;
+  Long id;
+  String username;
+  @JsonIgnore String password;
 
-	Set<RoleRes> roles;
-	DeviceRes device;
+  Set<RoleRes> roles;
+  DeviceRes device;
 }

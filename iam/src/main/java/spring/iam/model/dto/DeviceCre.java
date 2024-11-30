@@ -13,12 +13,11 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class DeviceCre {
-	@NotBlank(message = "ipAddress can not be blank")
-	String ipAddress;
+  @NotBlank(message = "ipAddress can not be blank")
+  String ipAddress;
 
-	@NotBlank(message = "userAgent can not be blank")
-	String userAgent;
+  @NotBlank(message = "userAgent can not be blank")
+  String userAgent;
 
-	@NotNull(message = "userId can not be blank")
-	Long userId;
+  @NotNull(message = "userId can not be blank") Long userId;
 }
