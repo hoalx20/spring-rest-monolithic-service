@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -29,6 +30,7 @@ import spring.iam.response.Response;
 import spring.iam.response.ResponsePaging;
 import spring.iam.service.IUserSrv;
 
+@Hidden
 @RestController
 @RequestMapping(path = "/api/v1/users")
 @RequiredArgsConstructor

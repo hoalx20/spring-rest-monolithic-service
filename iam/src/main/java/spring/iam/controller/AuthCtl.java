@@ -2,11 +2,8 @@ package spring.iam.controller;
 
 import java.util.HashMap;
 
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,6 +11,12 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +31,7 @@ import spring.iam.model.dto.RegisterRes;
 import spring.iam.response.Response;
 import spring.iam.service.IAuthSrv;
 
+@Tag(name = "Authentication Controller", description = "Authentication controller on API")
 @RestController
 @RequestMapping(path = "/api/v1/auth")
 @RequiredArgsConstructor
@@ -35,6 +39,13 @@ import spring.iam.service.IAuthSrv;
 public class AuthCtl {
 	IAuthSrv jwtAuthSrv;
 
+	@Operation(summary = "Sign-up", description = "Sign-up endpoint for new user")
+	@ApiResponse(responseCode = "200", description = "Ok: Success", content = {
+			@Content(schema = @Schema(implementation = CredentialRes.class), mediaType = "application/json") })
+	@ApiResponse(responseCode = "400", description = "Bad request: missing username, password, roleIds, username already exists, etc...", content = {
+			@Content(schema = @Schema(), mediaType = "application/json") })
+	@ApiResponse(responseCode = "500", description = "Internal server error: uncategorized error", content = {
+			@Content(schema = @Schema(), mediaType = "application/json") })
 	@PostMapping("/sign-up")
 	public ResponseEntity<Response<CredentialRes>> signUp(@RequestBody @Valid RegisterReq request) {
 		Success created = Success.SIGN_UP;
@@ -43,6 +54,13 @@ public class AuthCtl {
 		return ResponseEntity.status(created.getHttpStatus()).body(response);
 	}
 
+	@Operation(summary = "Sign-in", description = "Sign-in endpoint for existing user")
+	@ApiResponse(responseCode = "200", description = "Ok: Success", content = {
+			@Content(schema = @Schema(implementation = CredentialRes.class), mediaType = "application/json") })
+	@ApiResponse(responseCode = "400", description = "Bad request: missing username, password, username not exists, etc...", content = {
+			@Content(schema = @Schema(), mediaType = "application/json") })
+	@ApiResponse(responseCode = "500", description = "Internal server error: uncategorized error", content = {
+			@Content(schema = @Schema(), mediaType = "application/json") })
 	@PostMapping("/sign-in")
 	public ResponseEntity<Response<CredentialRes>> signIn(@RequestBody @Valid CredentialReq request) {
 		Success ok = Success.SIGN_IN;
@@ -51,15 +69,30 @@ public class AuthCtl {
 		return ResponseEntity.ok().body(response);
 	}
 
+	@Operation(summary = "Retrieve profile", description = "Retrieve profile endpoint for existing user")
+	@ApiResponse(responseCode = "200", description = "Ok: Success", content = {
+			@Content(schema = @Schema(implementation = RegisterReq.class), mediaType = "application/json") })
+	@ApiResponse(responseCode = "401", description = "Unauthorized: missing accessToken, token is ill legal, etc...", content = {
+			@Content(schema = @Schema(), mediaType = "application/json") })
+	@ApiResponse(responseCode = "500", description = "Internal server error: uncategorized error", content = {
+			@Content(schema = @Schema(), mediaType = "application/json") })
+	@SecurityRequirement(name = "Authorization")
 	@GetMapping("/me")
-	public ResponseEntity<Response<RegisterRes>> me(@AuthenticationPrincipal UserDetails userDetails,
-			@RequestHeader(value = HttpHeaders.AUTHORIZATION, required = true) String accessToken) {
+	public ResponseEntity<Response<RegisterRes>> me(Authentication authentication) {
 		Success ok = Success.RETRIEVE_PROFILE;
-		RegisterRes user = jwtAuthSrv.me(userDetails.getUsername());
+		RegisterRes user = jwtAuthSrv.me(authentication.getName());
 		var response = Response.<RegisterRes> builder().code(ok.getCode()).message(ok.getMessage()).payload(user).build();
 		return ResponseEntity.ok().body(response);
 	}
 
+	@Operation(summary = "Sign out", description = "Sign out endpoint for logon user")
+	@ApiResponse(responseCode = "200", description = "Ok: Success", content = {
+			@Content(schema = @Schema(implementation = Long.class), mediaType = "application/json") })
+	@ApiResponse(responseCode = "401", description = "Unauthorized: missing accessToken, token is ill legal, etc...", content = {
+			@Content(schema = @Schema(), mediaType = "application/json") })
+	@ApiResponse(responseCode = "500", description = "Internal server error: uncategorized error", content = {
+			@Content(schema = @Schema(), mediaType = "application/json") })
+	@SecurityRequirement(name = "Authorization")
 	@PostMapping("/sign-out")
 	public ResponseEntity<Response<Long>> signOut(Authentication authentication) {
 		Success created = Success.SIGN_OUT;
@@ -71,9 +104,17 @@ public class AuthCtl {
 		return ResponseEntity.status(created.getHttpStatus()).body(response);
 	}
 
+	@Operation(summary = "Refresh token", description = "Refresh token endpoint for existing user")
+	@ApiResponse(responseCode = "200", description = "Ok: Success", content = {
+			@Content(schema = @Schema(implementation = RegisterRes.class), mediaType = "application/json") })
+	@ApiResponse(responseCode = "401", description = "Unauthorized: missing accessToken, fresh token, token is ill legal, edited, etc...", content = {
+			@Content(schema = @Schema(), mediaType = "application/json") })
+	@ApiResponse(responseCode = "500", description = "Internal server error: uncategorized error", content = {
+			@Content(schema = @Schema(), mediaType = "application/json") })
+	@SecurityRequirement(name = "Authorization")
 	@PostMapping("/refresh")
-	public ResponseEntity<Response<CredentialRes>> refresh(@RequestHeader(value = HttpHeaders.AUTHORIZATION, required = true) String accessToken,
-			@RequestHeader(value = "X-REFRESH-TOKEN", required = true) String refreshToken, Authentication authentication) {
+	public ResponseEntity<Response<CredentialRes>> refresh(@RequestHeader(value = "X-REFRESH-TOKEN", required = true) String refreshToken,
+			Authentication authentication) {
 		Success ok = Success.REFRESH_JWT_TOKEN;
 		refreshToken = refreshToken.replace("Bearer ", "");
 		@SuppressWarnings("unchecked")
