@@ -9,7 +9,7 @@ import lombok.experimental.FieldDefaults;
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public enum Permission {
-	ROLE_ADMIN("ROLE_ADMIN"), ROLE_USER("ROLE_USER"),
+	ROLE_ADMIN("ADMIN"), ROLE_USER("USER"),
 
 	CREATE("CREATE"), READ("READ"), UPDATE("UPDATE"), DELETE("DELETE");
 

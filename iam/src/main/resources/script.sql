@@ -16,6 +16,29 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `bad_credential`
+--
+
+DROP TABLE IF EXISTS `bad_credential`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `bad_credential` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `access_token_expired_at` datetime(6) NOT NULL,
+  `access_token_id` varchar(255) NOT NULL,
+  `user_id` bigint NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bad_credential`
+--
+
+/*!40000 ALTER TABLE `bad_credential` DISABLE KEYS */;
+/*!40000 ALTER TABLE `bad_credential` ENABLE KEYS */;
+
+--
 -- Table structure for table `device`
 --
 
@@ -67,7 +90,7 @@ CREATE TABLE `privilege` (
 --
 
 /*!40000 ALTER TABLE `privilege` DISABLE KEYS */;
-INSERT INTO `privilege` VALUES (1,'2024-11-29 20:39:12.756634','CREATE PRIVILEGE','CREATE','2024-11-29 20:39:12.756634',0x00),(2,'2024-11-29 20:39:16.466999','READ PRIVILEGE','READ','2024-11-29 20:39:16.466999',0x00),(3,'2024-11-29 20:39:21.331936','UPDATE PRIVILEGE','UPDATE','2024-11-29 20:39:21.331936',0x00),(4,'2024-11-29 20:39:25.951720','DELETE PRIVILEGE','DELETE','2024-11-29 20:39:25.951720',0x00);
+INSERT INTO `privilege` VALUES (1,'2024-11-30 14:04:45.295968','READ PRIVILEGE','READ','2024-11-30 14:04:45.295968',0x00),(2,'2024-11-30 14:04:52.141204','CREATE PRIVILEGE','CREATE','2024-11-30 14:04:52.141204',0x00),(3,'2024-11-30 14:04:56.809583','UPDATE PRIVILEGE','UPDATE','2024-11-30 14:04:56.809583',0x00),(4,'2024-11-30 14:05:01.732173','DELETE PRIVILEGE','DELETE','2024-11-30 14:05:01.732173',0x00);
 /*!40000 ALTER TABLE `privilege` ENABLE KEYS */;
 
 --
@@ -94,7 +117,7 @@ CREATE TABLE `role` (
 --
 
 /*!40000 ALTER TABLE `role` DISABLE KEYS */;
-INSERT INTO `role` VALUES (1,'2024-11-29 20:39:37.918539','USER ROLE','USER','2024-11-29 20:39:37.918539',0x00),(2,'2024-11-29 20:39:46.857809','ADMIN ROLE','ADMIN','2024-11-29 20:39:46.857809',0x00);
+INSERT INTO `role` VALUES (1,'2024-11-30 14:05:17.759790','USER ROLE','USER','2024-11-30 14:05:17.760291',0x00),(2,'2024-11-30 14:05:27.250023','ADMIN ROLE','ADMIN','2024-11-30 14:05:27.250023',0x00);
 /*!40000 ALTER TABLE `role` ENABLE KEYS */;
 
 --
@@ -167,7 +190,7 @@ CREATE TABLE `user` (
   `deleted` bit(1) NOT NULL COMMENT 'Soft-delete indicator',
   PRIMARY KEY (`id`),
   UNIQUE KEY `UKsb8bbouer5wak8vyiiy4pf2bx` (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -175,6 +198,7 @@ CREATE TABLE `user` (
 --
 
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (1,'2024-11-30 14:05:54.487448','$2a$10$VB221QnJ94FuIhuW2wN5Pu31ZJzSKT9gv6mfueaPhFHPR17Kv/hNO','2024-11-30 14:05:54.487448','hoalx1',0x00),(2,'2024-11-30 14:06:22.065779','$2a$10$w6FFlHF9ckouslfgCx7bWu2wt5jy.trRZI2wC/IWbCR1aGuwtXunC','2024-11-30 14:06:22.065779','hoalx2',0x00);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 
 --
@@ -201,6 +225,7 @@ CREATE TABLE `user_roles` (
 --
 
 /*!40000 ALTER TABLE `user_roles` DISABLE KEYS */;
+INSERT INTO `user_roles` VALUES (1,1,1),(1,2,2);
 /*!40000 ALTER TABLE `user_roles` ENABLE KEYS */;
 
 --
@@ -216,4 +241,4 @@ CREATE TABLE `user_roles` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-29 20:40:26
+-- Dump completed on 2024-11-30 14:10:27

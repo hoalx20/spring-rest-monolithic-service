@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -48,6 +49,7 @@ public class DeviceSrv implements IDeviceSrv {
 		return owning.get();
 	}
 
+	@PreAuthorize("hasAnyAuthority('CREATE','ROLE_ADMIN')")
 	@Override
 	public DeviceRes save(DeviceCre creation) {
 		try {

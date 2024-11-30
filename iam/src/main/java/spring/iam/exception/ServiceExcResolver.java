@@ -5,6 +5,7 @@ import java.text.MessageFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.authorization.AuthorizationDeniedException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingRequestHeaderException;
@@ -88,6 +89,13 @@ public class ServiceExcResolver {
 		String message = MessageFormat.format("{0} is missing in request header.", exception.getHeaderName());
 		var response = Response.builder().code(badRequest.getCode()).message(message).build();
 		return ResponseEntity.badRequest().body(response);
+	}
+
+	@ExceptionHandler(value = AuthorizationDeniedException.class)
+	public ResponseEntity<Response<Object>> forbidden(AuthorizationDeniedException exception) {
+		Global forbidden = Global.FORBIDDEN;
+		var response = Response.builder().code(forbidden.getCode()).message(forbidden.getMessage()).build();
+		return ResponseEntity.status(forbidden.getHttpStatus()).body(response);
 	}
 
 	@ExceptionHandler(value = ServiceExc.class)
